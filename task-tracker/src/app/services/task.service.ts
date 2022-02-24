@@ -9,11 +9,17 @@ import { Task } from '../Task';
 })
 export class TaskService {
 
-  private apiURL = 'http://localhost:5000/tasks'
+  private apiUrl = 'http://localhost:5000/tasks'
 
   constructor(private http:HttpClient) { }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiURL)
+    return this.http.get<Task[]>(this.apiUrl);
   }
+
+  deleteTask(task: Task): Observable<Task> {
+    const url = `${this.apiUrl}/${task.id}`;
+    return this.http.delete<Task>(url);
+  }
+
 }
